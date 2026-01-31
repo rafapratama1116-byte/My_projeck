@@ -1,0 +1,13 @@
+import random
+
+kumpulan = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
+kode = int(input("masukkan kata sandi:"))
+
+password = ""
+
+for i in range(kode):
+    karakter = random.choice(kumpulan)
+    password = password + karakter
+
+print(password) 
