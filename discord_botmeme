@@ -1,0 +1,62 @@
+from urllib import request
+import discord
+from discord.ext import commands
+import os
+import random
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hi! I am a bot {bot.user}!')
+
+@bot.command()
+async def heh(ctx, count_heh: int = 5):
+    await ctx.send("he" * count_heh)
+
+@bot.listen()
+async def on_message(message):
+    print('one')
+
+@bot.listen('on_message')
+async def my_message(message):
+    print('two')
+
+@bot.command(name="meme")
+async def meme(ctx):
+    images = os.listdir('images')
+    image_name = random.choice(images)
+    with open(f'images/{image_name}', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+
+def get_duck_image_url():
+    url = 'https://random-d.uk/api/random'
+    res = request.get(url)
+    data = res.json()
+    return data['url']
+
+@bot.command()
+async def duck(ctx):
+    image_url = get_duck_image_url()
+    await ctx.send(image_url)
+
+@bot.command(name="animals")
+async def animals(ctx):
+    images = os.listdir('images')
+    image_name = random.choice(images)
+    with open(f'images/{image_name}', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+
+   
+
+bot.run("MTQ2OTYzOTU4ODY4NjU5NDEzMA.GzQI46.2WxGi7j7q6hcWnhe3wSF9S_VA4T6TJg_VNh8oM")
+
+
