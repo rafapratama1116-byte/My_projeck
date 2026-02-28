@@ -57,6 +57,6 @@ async def animals(ctx):
 
    
 
-bot.run("MTQ2OTYzOTU4ODY4NjU5NDEzMA.GzQI46.2WxGi7j7q6hcWnhe3wSF9S_VA4T6TJg_VNh8oM")
+bot.run("MTQ2OTYzOTU4ODY4NjU5NDEzMA.GV9Qqq.x83H0WiHKpFVzOw1FIsxXYhm7IpHQvpAiJyva4")
 
 
