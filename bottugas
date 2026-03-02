@@ -1,0 +1,36 @@
+import discord
+from discord.ext import commands
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event
+async def on_ready():
+    print("Bot sudah online!")
+
+@bot.command()
+async def eco(ctx):
+    await ctx.send("Halo Ayo kita cek kebiasaan sampah kamu!")
+    def check(message):
+        return message.author == ctx.author and message.channel == ctx.channel
+    await ctx.send("Berapa kali kamu beli minuman plastik dalam seminggu? (isi angka)")
+    message1 = await bot.wait_for("message", check=check)
+    plastik = int(message1.content)
+    await ctx.send("Apakah kamu sering buang sisa makanan? (ya/tidak)")
+    message2 = await bot.wait_for("message", check=check)
+    await ctx.send("Hasilnya:")
+    if plastik > 3:
+        await ctx.send("Kamu sering beli minuman plastik")
+        await ctx.send("Coba pakai tumbler ya")
+    else:
+        await ctx.send("Bagus! Kamu tidak terlalu banyak pakai plastik")
+    if message2.content.lower() == "ya":
+        await ctx.send("Coba ambil makanan secukupnya supaya tidak terbuang.")
+    else:
+        await ctx.send("Hebat! Kamu sudah hemat makanan")
+
+    await ctx.send("Kamu sudah belajar peduli lingkungan!")
+
+bot.run("MTQ2OTYzOTU4ODY4NjU5NDEzMA.GccNoa.GjWOhqevf-RZzTCO9LnzhX79yv-epl9FwRMukU")
